@@ -28,6 +28,17 @@ func (h *Handler) Login(c echo.Context) error {
 	return c.JSON(http.StatusOK, newUserLoginResponse(u))
 }
 
+func (h *Handler) CurrentUser(c echo.Context) error {
+	u, err := h.us.GetByUsername(userNameFromToken(c))
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
+	}
+	if u == nil {
+		return c.JSON(http.StatusNotFound, utils.AccessForbidden())
+	}
+	return c.JSON(http.StatusOK, newUserLoginResponse(u))
+}
+
 func (h *Handler) Update(c echo.Context) error {
 	req := newUserUpdateRequest()
 	if err := req.bind(c); err != nil {
@@ -62,12 +73,12 @@ func (h *Handler) Vote(c echo.Context) error {
 	}
 
 	idkandidat, _ := strconv.Atoi(c.QueryParam("idkandidat"))
-	k, err := h.ks.GetByIdKandidat(idkandidat)
+	k, err := h.ks.GetByNomorUrut(idkandidat)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
 	}
 	if k == nil {
-		return c.JSON(http.StatusBadRequest, utils.NotFound())
+		return c.JSON(http.StatusNotFound, utils.NotFound())
 	}
 	k.JumlahSuara += 1
 	if err := h.ks.UpdateKandidat(k); err != nil {

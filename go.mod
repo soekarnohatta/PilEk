@@ -11,6 +11,7 @@ require (
 	github.com/go-playground/universal-translator v0.16.0 // indirect
 	github.com/gosimple/slug v1.5.0
 	github.com/jinzhu/gorm v1.9.8
+	github.com/labstack/echo v3.3.10+incompatible // indirect
 	github.com/labstack/echo/v4 v4.1.16
 	github.com/labstack/gommon v0.3.1-0.20210908060213-57d86603b883
 	github.com/leodido/go-urn v1.1.0 // indirect

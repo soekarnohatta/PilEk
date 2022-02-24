@@ -61,6 +61,7 @@ func newGetKandidatResponse(kandidat *model.Kandidat) *singleKandidatResponse {
 	newResp.Misi = kandidat.Misi
 	newResp.Status = kandidat.Status
 	newResp.NomorUrut = kandidat.NomorUrut
+	newResp.Image = kandidat.Image
 	return &singleKandidatResponse{*newResp}
 }
 
@@ -76,6 +77,7 @@ func newGetKandidatListResponse(kandidat []model.Kandidat) *multipleKandidatResp
 		cr.Misi = val.Misi
 		cr.Status = val.Status
 		cr.NomorUrut = val.NomorUrut
+		cr.Image = val.Image
 		r.MultipleKandidat = append(r.MultipleKandidat, cr)
 	}
 

@@ -16,7 +16,7 @@ func New() *gorm.DB {
 		fmt.Println("storage err: ", err)
 	}
 	db.DB().SetMaxIdleConns(3)
-	db.LogMode(true)
+	db.LogMode(false)
 	return db
 }
 

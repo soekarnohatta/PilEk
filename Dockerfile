@@ -5,7 +5,9 @@ FROM golang:1.12.1 AS build
 
 ENV GO111MODULE=on \
     GOOS=linux \
-    GOARCH=amd64
+    GOARCH=amd64 \
+    CGO_CFLAGS="-g -O2 -Wno-return-local-addr"
+
 
 RUN mkdir -p /src
 

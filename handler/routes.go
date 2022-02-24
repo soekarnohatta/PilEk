@@ -14,6 +14,7 @@ func (h *Handler) Register(v1 *echo.Group) {
 	user := v1.Group("/user", jwtMiddleware)
 	user.PUT("/vote", h.Vote)
 	user.POST("/update", h.Update)
+	user.GET("/current", h.CurrentUser)
 
 	kandidat := v1.Group("/kandidat")
 	kandidat.GET("/get", h.GetOneKandidat)
