@@ -1,13 +1,3 @@
-/*
-module.exports = {
-  devServer: {
-    port: 8081,
-  }
-}
-*/
-
-
-
 'use strict'
 const path = require('path')
 
@@ -16,12 +6,6 @@ function resolve(dir) {
 }
 
 const name = 'Aplikasi Pusdatin OSIS SMAIA 19' // page title
-
-// If your port is set to 80,
-// use administrator privileges to execute the command line.
-// For example, Mac: sudo npm run
-// You can change the port by the following methods:
-const port = process.env.port || process.env.npm_config_port || 8081// dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -38,7 +22,7 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
+    port: 8080,
     open: true,
     overlay: {
       warnings: false,

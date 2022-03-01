@@ -15,3 +15,11 @@ export default new Vuex.Store({
         vote,
     }
 });
+
+export function currentUser() {
+    let user = JSON.parse(localStorage.getItem('user'))
+    if (user) {
+        return user
+    }
+   return null
+}

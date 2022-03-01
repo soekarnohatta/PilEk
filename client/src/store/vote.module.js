@@ -1,9 +1,5 @@
-import VoteService from '../services/vote.service';
-
-const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user
-    ? {statusUser: {vote: user.status}, user}
-    : {statusUser: {vote: "Belum Memilih"}, user: null};
+import VoteService from '@/services/vote.service';
+import {initialState} from "@/store/auth.module";
 
 export const vote = {
     namespaced: true,

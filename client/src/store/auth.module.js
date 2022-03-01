@@ -1,7 +1,7 @@
-import AuthService from '../services/auth.service';
+import AuthService from '@/services/auth.service';
 
-const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user
+let user = JSON.parse(localStorage.getItem('user'));
+export let initialState = user
     ? {statusUser: {loggedIn: true, vote: user.status}, user}
     : {statusUser: {loggedIn: false, vote: "Belum Memilih"}, user: null};
 

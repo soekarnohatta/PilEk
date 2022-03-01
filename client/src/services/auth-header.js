@@ -1,11 +1,13 @@
+import {currentUser} from "@/store";
+
 class AuthHeaderService {
     getToken() {
-        let user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
+       // if (user) {
+        // this.user = null;
             return {
-                headers: {'Authorization': 'Bearer ' + user.accessToken},
+                headers: {'Authorization': 'Bearer ' + currentUser().accessToken},
             };
-        }
+       // }
     }
 }
 
