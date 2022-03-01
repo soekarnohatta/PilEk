@@ -45,6 +45,7 @@ export default {
   beforeMount() {
     UserService.getUser().then(response => {
       this.user = response.data.userlogin
+      this.user.accessToken = this.$store.state.auth.user.accessToken
       NProgress.done()
     });
     if (!this.user) {

@@ -5,9 +5,10 @@ const API_URL = '/api/user/vote'
 
 class VoteService {
     voteKandidat(id) {
-        return axios.put(API_URL + "?idkandidat=" + id, {}, AuthHeaderService.getToken()).then(response => {
-            return response.data
-        })
+        return axios.put(API_URL + "?idkandidat=" + id, {}, AuthHeaderService.getToken())
+            .then(response => {
+                return response.data
+            })
     }
 }
 
