@@ -29,14 +29,18 @@ func (h *Handler) Login(c echo.Context) error {
 }
 
 func (h *Handler) CurrentUser(c echo.Context) error {
-	u, err := h.us.GetByUsername(userNameFromToken(c))
+	getUsername := userNameFromToken(c)
+	if getUsername == "" {
+		return c.JSON(http.StatusBadRequest, utils.NewError(fmt.Errorf("%v", "token tidak ditemukan")))
+	}
+	u, err := h.us.GetByUsername(getUsername)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
 	}
 	if u == nil {
 		return c.JSON(http.StatusNotFound, utils.AccessForbidden())
 	}
-	return c.JSON(http.StatusOK, newUserLoginResponse(u))
+	return c.JSON(http.StatusOK, newUserCurrentResponse(u))
 }
 
 func (h *Handler) Update(c echo.Context) error {
@@ -61,7 +65,11 @@ func (h *Handler) Update(c echo.Context) error {
 }
 
 func (h *Handler) Vote(c echo.Context) error {
-	u, err := h.us.GetByUsername(userNameFromToken(c))
+	getUsername := userNameFromToken(c)
+	if getUsername == "" {
+		return c.JSON(http.StatusBadRequest, utils.NewError(fmt.Errorf("%v", "token tidak ditemukan")))
+	}
+	u, err := h.us.GetByUsername(getUsername)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
 	}
@@ -95,9 +103,6 @@ func (h *Handler) Vote(c echo.Context) error {
 }
 
 func userNameFromToken(c echo.Context) string {
-	id, ok := c.Get("user").(string)
-	if !ok {
-		return ""
-	}
-	return id
+	u := c.Get("user").(string)
+	return u
 }

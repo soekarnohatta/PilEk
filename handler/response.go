@@ -29,7 +29,23 @@ func newUserLoginResponse(u *model.User) *userLoginResponse {
 		r.User.Status = "Belum Memilih"
 	}
 	r.User.Aktif = u.Aktif
-	r.User.Token = utils.GenerateJWT(u.ID)
+	r.User.Token = utils.GenerateJWT(u.Username)
+	return r
+}
+
+func newUserCurrentResponse(u *model.User) *userLoginResponse {
+	r := new(userLoginResponse)
+	r.User.Username = u.Username
+	r.User.Nama = u.Nama
+	r.User.IdKelas = u.IdKelas
+	r.User.IdKandidat = u.IdKandidat
+	if u.Status == model.SudahMemilih {
+		r.User.Status = "Sudah Memilih"
+	} else {
+		r.User.Status = "Belum Memilih"
+	}
+	r.User.Aktif = u.Aktif
+	r.User.Token = "Hidden"
 	return r
 }
 
