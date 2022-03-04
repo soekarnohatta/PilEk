@@ -103,10 +103,7 @@ export default {
           NProgress.done()
         },
         error => {
-          this.error =
-              (error.response && error.response.data && error.response.data.errors.body) ||
-              error.message ||
-              error.toString();
+          this.error = (error.response && error.response.data && error.response.data.errors.body) || error.message;
         }
     );
   },
@@ -129,10 +126,7 @@ export default {
               if (error.response.status === 400) {
                 this.$router.push('/sudah');
               } else {
-                this.error =
-                    (error.response && error.response.data && error.response.data.errors.body) ||
-                    error.message ||
-                    error.toString();
+                this.error = (error.response && error.response.data && error.response.data.errors.body) || error.message;
                 this.active[kandidat.idkandidat] = false;
               }
             }

@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import NProgress from 'nprogress/nprogress'
 import 'nprogress/nprogress.css'
+import axios from "axios";
 
 Vue.use(Router);
 export const router = new Router({
@@ -45,7 +46,6 @@ export const router = new Router({
 });
 
 router.beforeEach(async (to, from, next) => {
-    // start progress bar
     NProgress.start()
 
     const publicPages = ['/login', '/home'];
@@ -58,3 +58,13 @@ router.beforeEach(async (to, from, next) => {
         next();
     }
 });
+
+axios.interceptors.response.use(
+    response => response,
+    error => {
+        if ((error.response && error.response.data && error.response.data.errors.body) === "invalid or expired jwt") {
+            NProgress.done()
+            window.location.href = './login';
+        }
+
+    })

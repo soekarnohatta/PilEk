@@ -98,10 +98,7 @@ export default {
               },
               async error => {
                 this.loading = false;
-                this.message =
-                    (error.response && error.response.data && error.response.data.errors.body) ||
-                    error.message ||
-                    error.toString();
+                this.message = (error.response && error.response.data && error.response.data.errors.body) || error.message;
               }
           );
         }
