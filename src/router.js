@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import NProgress from 'nprogress/nprogress'
 import 'nprogress/nprogress.css'
 import axios from "axios";
+import AuthService from "@/services/auth.service";
 
 Vue.use(Router);
 export const router = new Router({
@@ -64,6 +65,7 @@ axios.interceptors.response.use(
     error => {
         if ((error.response && error.response.data && error.response.data.errors.body) === "invalid or expired jwt") {
             NProgress.done()
+            AuthService.logout()
             window.location.href = './login';
         }
 
