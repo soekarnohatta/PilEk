@@ -1,18 +1,16 @@
-import axios from 'axios';
-
-const API_URL = '/api/';
+import {instance} from "@/utils/axios";
 
 class AuthService {
     login(user) {
-        return axios
-            .post(API_URL + 'login', {
+        return instance
+            .post('login', {
                 user: {
                     username: user.username,
                     password: user.password
                 }
             })
             .then(response => {
-                if (response.data.userlogin.accessToken) {
+                if (response.data.userlogin && response.data.userlogin.aktif && response.data.userlogin.accessToken) {
                     localStorage.setItem('user', JSON.stringify(response.data.userlogin));
                 }
 

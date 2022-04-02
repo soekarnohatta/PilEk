@@ -1,11 +1,9 @@
-import axios from 'axios';
 import AuthHeaderService from "@/services/auth-header";
-
-const API_URL = '/api/user/'
+import {instance} from "@/utils/axios";
 
 class UserService {
     getUser() {
-        return axios.get(API_URL + 'current', AuthHeaderService.getToken());
+        return instance.get('/user/current', AuthHeaderService.getToken());
     }
 }
 

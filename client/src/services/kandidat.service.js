@@ -1,14 +1,12 @@
-import axios from 'axios';
-
-const API_URL = '/api/kandidat/'
+import {instance} from "@/utils/axios";
 
 class KandidatService {
     getKandidat() {
-        return axios.get(API_URL + 'get')
+        return instance.get( '/kandidat/get')
     }
 
     getAll() {
-        return axios.get(API_URL + 'getall')
+        return instance.get('/kandidat/getall')
     }
 }
 
