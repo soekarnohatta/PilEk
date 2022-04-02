@@ -14,6 +14,7 @@ type userLoginResponse struct {
 		Status     string `json:"status"`
 		Aktif      bool   `json:"aktif"`
 		Token      string `json:"accessToken"`
+		IsAdmin    bool   `json:"isAdmin"`
 	} `json:"userlogin"`
 }
 
@@ -29,7 +30,12 @@ func newUserLoginResponse(u *model.User) *userLoginResponse {
 		r.User.Status = "Belum Memilih"
 	}
 	r.User.Aktif = u.Aktif
-	r.User.Token = utils.GenerateJWT(u.Username)
+	r.User.IsAdmin = u.IsAdmin
+
+	if r.User.Aktif {
+		r.User.Token = utils.GenerateJWT(u.Username)
+	}
+
 	return r
 }
 
@@ -45,6 +51,7 @@ func newUserCurrentResponse(u *model.User) *userLoginResponse {
 		r.User.Status = "Belum Memilih"
 	}
 	r.User.Aktif = u.Aktif
+	r.User.IsAdmin = u.IsAdmin
 	r.User.Token = "Hidden"
 	return r
 }
