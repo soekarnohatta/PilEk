@@ -1,10 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import Home from '../views/Home.vue';
 import NProgress from 'nprogress/nprogress'
 import 'nprogress/nprogress.css'
-import axios from "axios";
-import AuthService from "@/services/auth.service";
 
 Vue.use(Router);
 export const router = new Router({
@@ -21,27 +19,27 @@ export const router = new Router({
         },
         {
             path: '/login',
-            component: () => import('./views/Login.vue')
+            component: () => import('../views/Login.vue')
         },
         {
             path: '/profile',
             name: 'profile',
-            component: () => import('./views/Profile.vue')
+            component: () => import('../views/Profile.vue')
         },
         {
             path: '/vote',
             name: 'voting',
-            component: () => import('./views/Vote')
+            component: () => import('../views/Vote')
         },
         {
             path: '/sudah',
             name: 'Thanks',
-            component: () => import('./views/Thanks')
+            component: () => import('../views/Thanks')
         },
         {
             path: "/:catchAll(.*)",
             name: 'error',
-            component: () => import('./views/Error.vue')
+            component: () => import('../views/Error.vue')
         },
     ]
 });
@@ -59,14 +57,3 @@ router.beforeEach(async (to, from, next) => {
         next();
     }
 });
-
-axios.interceptors.response.use(
-    response => response,
-    error => {
-        if ((error.response && error.response.data && error.response.data.errors.body) === "invalid or expired jwt") {
-            NProgress.done()
-            AuthService.logout()
-            window.location.href = './login';
-        }
-
-    })

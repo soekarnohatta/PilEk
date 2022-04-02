@@ -2,8 +2,8 @@ import AuthService from '@/services/auth.service';
 
 let user = JSON.parse(localStorage.getItem('user'));
 export let initialState = user
-    ? {statusUser: {loggedIn: true, vote: user.status}, user}
-    : {statusUser: {loggedIn: false, vote: "Belum Memilih"}, user: null};
+    ? {statusUser: {loggedIn: true, vote: user.status, isAdmin: user.isAdmin}, user}
+    : {statusUser: {loggedIn: false, vote: "Belum Memilih", isAdmin: false}, user: null};
 
 export const auth = {
     namespaced: true,
@@ -29,6 +29,7 @@ export const auth = {
     mutations: {
         loginSuccess(state, user) {
             state.statusUser.loggedIn = true;
+            state.statusUser.isAdmin = user.isAdmin
             state.user = user;
         },
         loginFailure(state) {

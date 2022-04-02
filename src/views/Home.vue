@@ -73,6 +73,27 @@
           </div>
         </div>
       </div>
+      <div v-if="currentUser && currentUser.isAdmin" class="col-12 col-lg-3 mb-10 mt-3">
+        <div v-if="currentUser && currentUser.isAdmin" class="card h-100">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-2 text-center">
+                <i class="fas fa-user-graduate fa-2x text-primary-dark"></i>
+              </div>
+              <div class="col-10">
+                <h6 class="card-title mb-0">
+                  <router-link to="/admin">
+                    <a class="stretched-link text-black text-decoration-none">
+                      Panel Admin</a>
+                  </router-link>
+                </h6>
+                <p class="card-text text-muted text-truncate">
+                  Silahkan Admin Disini</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div v-if="currentUser" class="col-12 col-lg-3 mb-10 mt-3">
         <div v-if="currentUser" class="card h-100">
           <div class="card-body">

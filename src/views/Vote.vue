@@ -73,7 +73,7 @@
 import Vue from "vue";
 import KandidatService from "@/services/kandidat.service";
 import UserService from "@/services/user.service";
-import {CardPlugin, BadgePlugin, ModalPlugin} from 'bootstrap-vue/src'
+import {CardPlugin, BadgePlugin, ModalPlugin, AlertPlugin} from 'bootstrap-vue/src'
 import NProgress from 'nprogress/nprogress'
 
 export default {
@@ -89,6 +89,7 @@ export default {
     Vue.use(CardPlugin);
     Vue.use(BadgePlugin);
     Vue.use(ModalPlugin);
+    Vue.use(AlertPlugin);
   },
   beforeCreate() {
     UserService.getUser().then(response => {

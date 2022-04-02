@@ -93,12 +93,17 @@ export default {
 
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
-              async () => {
-                await this.$router.push('/home');
+              async data  => {
+                if (data.aktif ){
+                  await this.$router.push('/home');
+                }
+
+                this.loading = false;
+                this.message = 'Akun Ada Dinonaktifkan. Silahkan Hubungi Admin Untuk Mengaktifkan Kembali.'
               },
               async error => {
                 this.loading = false;
-                this.message = (error.response && error.response.data && error.response.data.errors.body) || error.message;
+                this.message =  (error.response && error.response.data && error.response.data.errors.body) || error.message;
               }
           );
         }

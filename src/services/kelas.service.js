@@ -1,14 +1,12 @@
-import axios from 'axios';
-
-const API_URL = '/api/kelas/'
+import {instance} from "@/utils/axios";
 
 class KelasService {
     getKelas() {
-        return axios.get(API_URL + 'get');
+        return instance.get('/kelas/get');
     }
 
     getAll() {
-        return axios.get(API_URL + 'getall',);
+        return instance.get('/kelas/getall',);
     }
 }
 
